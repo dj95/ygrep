@@ -42,13 +42,3 @@ steps:
   - export GO111MODULE=on
   # run tests
   - staticcheck ./...
-
-- name: sonarqube
-  image: aosapps/drone-sonar-plugin
-  depends_on:
-  - unittests 
-  settings:
-    sonar_host:
-      from_secret: sonar_host
-    sonar_token:
-      from_secret: sonar_token
