@@ -36,12 +36,12 @@ deps:
 		GO111MODULE=on $(GOCMD) mod vendor
 
 release: clean
-		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -v cmd/ygrep/main.go
+		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -ldflags="-s -w" -a -installsuffix cgo -v cmd/ygrep/main.go
 		cd $(BINARY_PATH) && tar cvzf ygrep_linux_amd64.tar.gz $(BINARY_NAME)
 		rm -rf $(BINARY_PATH)$(BINARY_NAME)
-		CGO_ENABLED=0 GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -v cmd/ygrep/main.go
-		cd $(BINARY_PATH) && tar cvzf ygrep_windows_amd64.tar.gz $(BINARY_NAME)
+		CGO_ENABLED=0 GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -a -installsuffix cgo -v cmd/ygrep/main.go
+		cd $(BINARY_PATH) && zip ygrep_windows_amd64.zip $(BINARY_NAME)
 		rm -rf $(BINARY_PATH)$(BINARY_NAME)
-		CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -v cmd/ygrep/main.go
+		CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -a -installsuffix cgo -v cmd/ygrep/main.go
 		cd $(BINARY_PATH) && tar cvzf ygrep_macos_amd64.tar.gz $(BINARY_NAME)
 		rm -rf $(BINARY_PATH)$(BINARY_NAME)
