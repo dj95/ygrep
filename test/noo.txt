@@ -1,0 +1,3 @@
+foo
+bar
+this is an invalid file
