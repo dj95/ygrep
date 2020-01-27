@@ -9,9 +9,6 @@ GOGET=$(GOCMD) get
 # Build settings
 BINARY_PATH=./bin/
 BINARY_NAME=ygrep
-BINARY_LINUX=$(BINARY_NAME)_linux
-BINARY_WINDOWS=$(BINARY_NAME).exe
-BINARY_MACOS=$(BINARY_NAME)_macos
 
 # Test Settings
 TEST_FILES := $(shell $(GOCMD) list ./...)
@@ -38,7 +35,13 @@ clean:
 deps:
 		GO111MODULE=on $(GOCMD) mod vendor
 
-build_all:
-		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_LINUX) -v cmd/ygrep/main.go
-		CGO_ENABLED=0 GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_WINDOWS) -v cmd/ygrep/main.go
-		CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_MACOS) -v cmd/ygrep/main.go
+release: clean
+		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -v cmd/ygrep/main.go
+		cd $(BINARY_PATH) && tar cvzf ygrep_linux_amd64.tar.gz $(BINARY_NAME)
+		rm -rf $(BINARY_PATH)$(BINARY_NAME)
+		CGO_ENABLED=0 GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -v cmd/ygrep/main.go
+		cd $(BINARY_PATH) && tar cvzf ygrep_windows_amd64.tar.gz $(BINARY_NAME)
+		rm -rf $(BINARY_PATH)$(BINARY_NAME)
+		CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_NAME) -v cmd/ygrep/main.go
+		cd $(BINARY_PATH) && tar cvzf ygrep_macos_amd64.tar.gz $(BINARY_NAME)
+		rm -rf $(BINARY_PATH)$(BINARY_NAME)
