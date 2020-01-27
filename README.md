@@ -1,4 +1,4 @@
-<h1 align="center">ygrep</h1>
+<h1 align="center">🔍 ygrep</h1>
 
 <p align="center">
   Search for keys in all yaml files of a directory(and its subdirectories).
