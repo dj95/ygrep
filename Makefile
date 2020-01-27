@@ -37,3 +37,8 @@ clean:
 
 deps:
 		GO111MODULE=on $(GOCMD) mod vendor
+
+build_all:
+		CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_LINUX) -v cmd/ygrep/main.go
+		CGO_ENABLED=0 GOOS=windows GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_WINDOWS) -v cmd/ygrep/main.go
+		CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 $(GOBUILD) -o $(BINARY_PATH)$(BINARY_MACOS) -v cmd/ygrep/main.go
