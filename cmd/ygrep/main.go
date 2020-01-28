@@ -17,10 +17,34 @@ func init() {
 	// initialize the commandline flags
 	commandline.InitializeFlags()
 
-	// if the expression is not set...
-	if viper.GetString("expression") == "" {
+	// print the help when requested...
+	if viper.GetBool("help") {
+		commandline.PrintHelp()
+
+		// ...and exit gracefully
+		os.Exit(0)
+	}
+
+	// get the commandline flags
+	expression := pflag.Arg(0)
+	path := pflag.Arg(1)
+
+	// if the expression is used as argument and not as flag...
+	if viper.GetString("expression") == "" && expression != "" {
+		// ...set the flag value
+		viper.Set("expression", expression)
+	}
+
+	// if the expression is used as argument and not as flag...
+	if viper.GetString("path") == "." && path != "" {
+		// ...set the flag value
+		viper.Set("path", path)
+	}
+
+	// if the expression is not set as argument or flag...
+	if viper.GetString("expression") == "" || viper.GetString("path") == "" {
 		// ...print the help page...
-		pflag.PrintDefaults()
+		commandline.PrintHelp()
 
 		// ...and exit with an error code
 		os.Exit(1)
@@ -28,7 +52,6 @@ func init() {
 }
 
 func main() {
-
 	// search for yaml files
 	files, err := filesearch.FindYAML(
 		viper.GetString("path"),
@@ -58,7 +81,7 @@ func main() {
 		doc, err := yml.ReadFile(file)
 
 		if err != nil {
-			fmt.Printf("err: %v\n", err)
+			fmt.Printf(":: %s - %s\n", file, err.Error())
 			continue
 		}
 

@@ -48,6 +48,8 @@ search for the all keys containing 'foo' and their related values in the `./test
 you can use the commandline `ygrep -p ./test -e '.*foo.*'`. For searching recursively through
 all subdirectories of `./test`, use `ygrep -rp ./test -e '.*foo.*'`.
 
+ygrep also works similar like grep, so you are able to use `ygrep -r '.*foo.*' ./test` as an alternative to the previous example.
+
 Feel free to test those commands with the provided yml files in the `./test` directory provided
 in this repository. The first example should look like the following listing:
 
@@ -59,6 +61,25 @@ foo: bar
 ```
 
 Please refer to the help page (use `-h` as flag) for more options.
+
+```
+$ ygrep -h
+Usage: ygrep [OPTION]... PATTERN [PATH]
+Search PATTERN in each yaml file of the PATH
+Example: ygrep -ri foo ./test
+PATTERN should contain a regular expression that matches the
+key(s) to search for.
+
+Options:
+  -e, --expression string   the regular expression to use
+  -h, --help                Print the help
+  -i, --insensitive         use the expression case insensitive
+  -p, --path string         choose the path to work in (default ".")
+  -r, --recursive           search for yaml files recursively
+
+Report bugs at: https://github.com/dj95/ygrep/issues
+Homepage: https://github.com/dj95/ygrep
+```
 
 
 ## ✅ Testing

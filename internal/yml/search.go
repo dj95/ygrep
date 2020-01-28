@@ -18,6 +18,8 @@ func ReadFile(filename string) (map[interface{}]interface{}, error) {
 	}
 
 	// initialize the map
+	// TODO: find a better data structure, e.g. arrays as
+	// 		 root element do not work
 	m := make(map[interface{}]interface{})
 
 	// unmarshal the yaml file
@@ -55,6 +57,8 @@ func FindValuesByKeyRegex(
 			// ...skip to the next one
 			continue
 		}
+
+		// TODO: find the line number of the key
 
 		// convert the object back to a yaml string
 		// error handling does not seem to work... when an error is

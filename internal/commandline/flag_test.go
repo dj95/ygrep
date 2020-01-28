@@ -19,18 +19,23 @@ func TestInitializeFlags(t *testing.T) {
 			expectedDefaultValue: ".",
 		},
 		{
-			description:          "path",
+			description:          "expression",
 			flagName:             "expression",
 			expectedDefaultValue: "",
 		},
 		{
-			description:          "path",
+			description:          "insensitive",
 			flagName:             "insensitive",
 			expectedDefaultValue: false,
 		},
 		{
-			description:          "path",
+			description:          "recursive",
 			flagName:             "recursive",
+			expectedDefaultValue: false,
+		},
+		{
+			description:          "help",
+			flagName:             "help",
 			expectedDefaultValue: false,
 		},
 	}
@@ -42,4 +47,8 @@ func TestInitializeFlags(t *testing.T) {
 
 		assert.Equalf(t, test.expectedDefaultValue, value, test.description)
 	}
+}
+
+func TestPrintHelp(t *testing.T) {
+	PrintHelp()
 }
