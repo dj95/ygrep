@@ -3,9 +3,6 @@
 <p align="center">
   Search for keys in all yaml files of a directory(and its subdirectories).
   <br><br>
-  <a href="https://cloud.drone.io/dj95/ygrep">
-    <img alt="BuildStatus" src="https://cloud.drone.io/api/badges/dj95/ygrep/status.svg" />
-  </a>
   <a href="https://github.com/dj95/ygrep/actions?query=workflow%3AGo">
     <img alt="GoActions" src="https://github.com/dj95/ygrep/workflows/Go/badge.svg" />
   </a>
@@ -14,15 +11,6 @@
   </a>
   <a href="https://github.com/dj95/ygrep/releases">
     <img alt="latest version" src="https://img.shields.io/github/tag/dj95/ygrep.svg" />
-  </a>
-  <a href="https://codecov.io/gh/dj95/ygrep">
-    <img src="https://codecov.io/gh/dj95/ygrep/branch/master/graph/badge.svg" />
-  </a>
-  <a href="https://sonarcloud.io/dashboard?id=dj95:ygrep">
-    <img src="https://sonarcloud.io/api/project_badges/measure?project=dj95:ygrep&metric=sqale_rating" />
-  </a>
-  <a href="https://sonarcloud.io/dashboard?id=dj95:ygrep">
-    <img src="https://sonarcloud.io/api/project_badges/measure?project=dj95:ygrep&metric=alert_status" />
   </a>
 </p>
 

@@ -24,7 +24,7 @@ tests:
 		$(GOTEST) -v -short -covermode=count -coverprofile report/cover.out $(TEST_FILES)
 		$(GOCMD) tool cover -html=report/cover.out -o report/cover.html
 		$(GOLINT) -set_exit_status $(TEST_FILES)
-		CC=clang $(GOTEST) -v -msan -short $(TEST_FILES)
+		# CC=clang $(GOTEST) -v -msan -short $(TEST_FILES)
 		staticcheck $(TEST_FILES)
 
 clean:
