@@ -2,7 +2,6 @@
 package filesearch
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -16,7 +15,7 @@ func FindYAML(path string, recursive bool) ([]string, error) {
 	}
 
 	// read the current directory listing
-	files, err := ioutil.ReadDir(path)
+	files, err := os.ReadDir(path)
 
 	if err != nil {
 		return []string{}, err
@@ -26,7 +25,13 @@ func FindYAML(path string, recursive bool) ([]string, error) {
 
 	// iterate through the files
 	for _, f := range files {
-		if !isYAMLFile(f) {
+        fileInfo, err := f.Info()
+
+        if err != nil {
+            continue
+        }
+
+		if !isYAMLFile(fileInfo) {
 			continue
 		}
 

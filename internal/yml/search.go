@@ -2,7 +2,7 @@
 package yml
 
 import (
-	"io/ioutil"
+	"os"
 	"regexp"
 
 	"gopkg.in/yaml.v2"
@@ -11,7 +11,7 @@ import (
 // ReadFile Read a file into a yaml document.
 func ReadFile(filename string) (map[interface{}]interface{}, error) {
 	// read the file
-	data, err := ioutil.ReadFile(filename)
+	data, err := os.ReadFile(filename)
 
 	if err != nil {
 		return nil, err
